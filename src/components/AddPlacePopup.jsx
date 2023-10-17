@@ -5,6 +5,11 @@ function AddPlacePopup(props) {
   const [cardImage, setCardImage] = React.useState('');
   const [cardName, setCardName]  = React.useState('');
 
+  React.useEffect(() => {
+    setCardImage('');
+    setCardName('');
+  }, [props.onClose])
+
   function handleChangeCardImage(evt) {
     setCardImage(evt.target.value);
   }

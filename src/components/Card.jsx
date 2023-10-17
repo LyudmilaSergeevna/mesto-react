@@ -20,15 +20,15 @@ function Card(props) {
   }
 
   return (
-    <div id="element" className="element_type_default">
+    <div className="element_type_default">
       <article className="element">
           <img className="element__image" alt={`Изображение ${props.card.name}`} src={props.card.link} onClick={handleClick}/>
           {isOwn && <button className="element__delete-button" type="button" onClick={handleDeleteClick}></button>}
           <div className="element__info">
             <h2 className="element__title">{props.card.name}</h2>
-          <div className="element__like">
+            <div className="element__like">
             <button className={heartButtonClassName} type="button" onClick={handleLikeClick}></button>
-            <input className="element__like-total" value={props.card.likes.length} />
+            <p className="element__like-total">{props.card.likes.length}</p>
           </div>
           </div> 
        </article>

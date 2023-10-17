@@ -54,22 +54,22 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     if (!isLiked) {
-    api.likeCard(card._id)
-    .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  } else {
-    api.unlikeCard(card._id)
-    .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
+      api.likeCard(card._id)
+        .then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    } else {
+      api.unlikeCard(card._id)
+        .then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
   }
 
   function handleCardDelete(card) {
@@ -84,23 +84,23 @@ function App() {
 
  React.useEffect(() => {
   api.getUserInfo()
-  .then ((res) => {
-    setCurrentUser(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  }) 
+    .then ((res) => {
+      setCurrentUser(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    }) 
  }, []);
 
  function handleUpdateUser(data) {
   api.patchUserInfo(data)
-  .then((res) => {
-    setCurrentUser(res);
-    closeAllPopups();
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+    .then((res) => {
+      setCurrentUser(res);
+      closeAllPopups();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   function handleUpdateAvatar(data) {
@@ -116,25 +116,31 @@ function App() {
 
   function handleAddPlaceSubmit(data) {
     api.postNewCard(data)
-    .then((res) => {
-      setCards([res, ...cards]);
-      closeAllPopups();
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .then((res) => {
+        setCards([res, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="root">
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} cards={cards} />
+      <Main onEditProfile={handleEditProfileClick} 
+            onAddPlace={handleAddPlaceClick} 
+            onEditAvatar={handleEditAvatarClick} 
+            onCardClick={handleCardClick} 
+            onCardLike={handleCardLike} 
+            onCardDelete={handleCardDelete} 
+            cards={cards} />
       <Footer />
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} /> 
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} buttonText="Создать" />
-        <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />   
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} /> 
+      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} buttonText="Создать" />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />   
     </div>  
     </CurrentUserContext.Provider>
   );
