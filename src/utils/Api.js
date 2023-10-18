@@ -80,12 +80,12 @@ class Api {
   }
   }
 
-  const optionsApi = {
-    url: 'https://nomoreparties.co/v1/cohort-75',
-    headers : {
-      authorization: "37cb16fd-0a1c-4784-85d7-f8586264d2ea",
-      'Content-Type': "application/json" 
-    }
+const optionsApi = {
+  url: 'https://nomoreparties.co/v1/cohort-75',
+  headers : {
+    authorization: "37cb16fd-0a1c-4784-85d7-f8586264d2ea",
+    'Content-Type': "application/json" 
+  }
 }
 
 const api = new Api(optionsApi)

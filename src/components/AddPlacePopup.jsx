@@ -8,7 +8,7 @@ function AddPlacePopup(props) {
   React.useEffect(() => {
     setCardImage('');
     setCardName('');
-  }, [props.onClose])
+  }, [props.isOpen])
 
   function handleChangeCardImage(evt) {
     setCardImage(evt.target.value);
